@@ -1,15 +1,3 @@
-TODO
-====
-
-* pass squareModel to trackDetails instead of maintaining duplicate model
-* select first square on initialization
-* consistency for event names and functions
-* is the midi device always 0? See if you can refer to a device by it's name
-* make more const, especially when it's referenced multiple places
-* speed initial load by making midi initialization load async
-
-In the future: use listen() instead of on() because it's managed by backbone and prevents memory leaks
-
 Useful tracks numbers
 ---------------------
 

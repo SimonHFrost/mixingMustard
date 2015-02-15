@@ -6,10 +6,6 @@ body {
   background-repeat: repeat-x repeat-y;
 }
 
-.container {
-  padding: 20px;
-}
-
 .hidden {
   visibility: hidden;
   width: 0px;
@@ -31,6 +27,7 @@ h3 {
 /* Parent Elements */
 
 #mainView {
+  padding: 14px;
   background-color: purple;
 }
 
@@ -51,12 +48,14 @@ h3 {
 
 /* Launchpad Elements */
 
-.squareContainer {
+.square {
+  margin: 3px;
   display: inline;
 }
 
-.square {
+.lastSquare {
   margin: 3px;
+  display: block;
 }
 
 .selectedSquare {
@@ -66,12 +65,7 @@ h3 {
   margin: 1px;
 }
 
-/* Track Details Elements */
-
-.trackDetailsInfo {
-  height: 50px;
-  line-height: 50px;
-}
+/* Trackdetails Elements */
 
 .albumArt {
   float: left;

@@ -2,26 +2,38 @@
   <head>
     <title>Mixing Mustard</title>
   </head>
-  <body>
+  <body ng-app='app' ng-controller='appController'>
     <h1>Mixing Mustard</h1>
+    <div class='container'>
+        <div id='launchpad' class='col-md-6'>
+            <div class='squareContainer'>
+                <div ng-repeat="row in rows">
+                    <img class='square' ng-repeat='square in row track by $index' ng-click='click(square)' src='{{ square.cachedSound.playState === 1 ? "./img/button-active.png" : "./img/button-passive.png" }}'>
+                </div>
+            </div>
+        </div>
+
+        <div id='trackDetails' class='col-md-6'>
+            <img class='albumArt' src='{{ selectedSquare.artUrl || "./img/default.png" }}' />
+            <p>Track: {{ selectedSquare.title }}</p>
+            <p>Artist: {{ selectedSquare.artist }}</p>
+            <p>Position: {{ selectedSquare.position }}</p>
+            <p>Duration: {{ selectedSquare.duration }}</p>
+            <button ng-click='changeTrackClicked()'>Change Track</button>
+            <button ng-click='changePositionClicked()'>Change Position</button>
+            <button ng-click='changeDurationClicked()'>Change Duration</button>
+        </div>
+    </div>
 
     <script src='http://connect.soundcloud.com/sdk.js'></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
     <script src='//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js'></script>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js'></script>
 
-    <script src='http://ajax.cdnjs.com/ajax/libs/underscore.js/1.6.0/underscore-min.js'></script>
-    <script src='http://ajax.cdnjs.com/ajax/libs/backbone.js/1.1.2/backbone-min.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-route.js'></script>
 
-    <script src='./javascripts/launchpad/squareModel.js'></script>
-    <script src='./javascripts/launchpad/squareView.js'></script>
-    <script src='./javascripts/launchpad/squareCollection.js'></script>
-    <script src='./javascripts/launchpad/launchpadView.js'></script>
-    <script src='./javascripts/trackDetails/trackDetailsModel.js'></script>
-    <script src='./javascripts/trackDetails/trackDetailsView.js'></script>
-    <script src='./javascripts/main/libraryInitialiser.js'></script>
-    <script src='./javascripts/main/mainView.js'></script>
-    <script src='./javascripts/main/main.js'></script>
+    <script src='javascripts/main/libraryInitialiser.js'></script>
+    <script src='javascripts/angular/app.js'></script>
 
     <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
