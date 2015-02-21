@@ -26,11 +26,15 @@
       } else {
         console.warn("Couldn't find any midi devices");
       }
-      window.Midi.inputs()[0].onmidimessage = function(event) {
-        console.debug(event.data);
-        if (event.data[2] === 127) { // use on signal and ignore off
-          $('#launchpad').trigger('midiInput', event.data[1]);
-        }
+      if(window.Midi) {
+        window.Midi.inputs()[0].onmidimessage = function(event) {
+          console.debug(event.data);
+          if (event.data[2] === 127) { // use on signal and ignore off
+            $('#launchpad').trigger('midiInput', event.data[1]);
+          }
+        };
+      } else {
+        console.warn("Couldn't find and midi devices");
       };
     },
 
