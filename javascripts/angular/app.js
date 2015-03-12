@@ -61,10 +61,7 @@ app.controller('appController', function($scope) {
   // CLICKING CLIPS
 
   $scope.click = function(square) {
-    var trackUrl = square.url;
-
     playTrack(square);
-
     $scope.selectedSquare = square;
   };
 
@@ -100,25 +97,10 @@ app.controller('appController', function($scope) {
     $scope.$digest();
   };
 
-  $scope.changeTrackClicked = function() {
-    var url = prompt('URL: ');
-    if (url) {
-      $scope.selectedSquare.url = url;
+  $scope.changeProperty = function(propertyName) {
+    var value = prompt(propertyName + ': ');
+    if (value) {
+      $scope.selectedSquare[propertyName] = value;
     }
   };
-
-  $scope.changePositionClicked = function() {
-    var position = prompt('POSITION: ');
-    if (position) {
-      $scope.selectedSquare.position = position;
-    }
-  };
-
-  $scope.changeDurationClicked = function() {
-    var duration = prompt('DURATION: ');
-    if (duration) {
-      $scope.selectedSquare.duration = duration;
-    }
-  };
-
 });
