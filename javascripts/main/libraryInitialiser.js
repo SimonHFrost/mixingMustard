@@ -1,51 +1,44 @@
 (function($) {
-  window.LibraryInitialiser = Backbone.Model.extend({
+  window.LibraryInitialiser = function() {
+    var midiDevice;
 
-    initialize: function() {
-      this.setupSoundcloud();
-      this.setupWebMidi();
-    },
+    var initialiseWebMidi = function() {
+      navigator.requestMIDIAccess().then(onMidiSuccess, onMidiFailure, this);
+    };
 
-    setupSoundcloud: function() {
-      window.CLIENT_ID = '6603d805dad113c51b7df28b6737f2cc';
-
-      SC.initialize({
-        client_id: window.CLIENT_ID,
-        redirect_uri: 'http://example.com/callback.html',
-      });
-    },
-
-    setupWebMidi: function() {
-      navigator.requestMIDIAccess().then(this.onMidiSuccess, this.onMidiFailure, this);
-    },
-
-    onMidiSuccess: function(midiAccess) {
+    var onMidiSuccess = function(midiAccess) {
       if(midiAccess.outputs[0]) {
-        window.midiDevice = midiAccess.outputs[0];
-        window.midiDevice.send([176, 0, 0]); // reset launchpad
+        midiDevice = midiAccess.outputs[0];
+        midiDevice.send([176, 0, 0]); // reset launchpad
       } else {
         console.warn("Couldn't find any midi devices");
       }
-      window.Midi.inputs()[0].onmidimessage = function(event) {
+      Midi.inputs()[0].onmidimessage = function(event) {
         console.debug(event.data);
         if (event.data[2] === 127) { // use on signal and ignore off
           $('#launchpad').trigger('midiInput', event.data[1]);
         }
       };
-    },
+    };
 
-    onMidiFailure: function(message) {
+    var onMidiFailure = function(message) {
       console.log("Failed to get MIDI access - " + message);
-    },
+    };
 
-    onMidiMessage: function(event) {
-      $('#launchpad').trigger('midiInput', event.data[1]);
-    },
+    var onMidiMessage = function(event) {
+      // display proper image
+    };
 
-    sendMidiSignal: function(message) {
-      if(window.midiDevice) {
-        window.midiDevice.send(message);
+    var sendMidiSignal = function() {
+      var RED = 15;
+      var AMBER = 63;
+      var GREEN = 60;
+
+      var message = [0x90, squareNumber, AMBER];
+
+      if (midiDevice) {
+        midiDevice.send(message);
       }
-    }
-  });
+    };
+  };
 })(jQuery);
