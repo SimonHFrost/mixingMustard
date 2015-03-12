@@ -67,8 +67,9 @@ h3 {
 
 /* Trackdetails Elements */
 
-.albumArt {
+.albumArtContainer {
   float: left;
+  height: 125px;
 }
 
 p {

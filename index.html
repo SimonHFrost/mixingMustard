@@ -14,11 +14,15 @@
         </div>
 
         <div id='trackDetails' class='col-md-6'>
-            <img class='albumArt' src='{{ selectedSquare.artUrl || "./img/default.png" }}' />
-            <p>Track: {{ selectedSquare.title }}</p>
-            <p>Artist: {{ selectedSquare.artist }}</p>
-            <p>Position: {{ selectedSquare.position }}</p>
-            <p>Duration: {{ selectedSquare.duration }}</p>
+            <div class='albumArtContainer'>
+                <img class='albumArt' src='{{ selectedSquare.artUrl || "./img/default.png" }}' />
+            </div>
+            <div>
+                <p>Track: {{ selectedSquare.title }}</p>
+                <p>Artist: {{ selectedSquare.artist }}</p>
+                <p>Position: {{ selectedSquare.position }}</p>
+                <p>Duration: {{ selectedSquare.duration }}</p>
+            </div>
             <button ng-click='changeTrackClicked()'>Change Track</button>
             <button ng-click='changePositionClicked()'>Change Position</button>
             <button ng-click='changeDurationClicked()'>Change Duration</button>
